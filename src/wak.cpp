@@ -2,6 +2,8 @@
 #include <cstdlib> 
 #include <iostream>
 
+void game_loop(sf::RenderWindow& window);
+
 int main()
 {
     auto window = sf::RenderWindow{ { 900u, 900u }, "W.A.K" };
@@ -13,7 +15,7 @@ int main()
 
     title_txt.loadFromFile("/textures/Title.png");
     title.setTexture(title_txt);
-    title.setPosition(sf::Vector2f(200.f, 50.f));
+    title.setPosition(sf::Vector2f(0.f, 200.f));
     font.loadFromFile("/Font/ARIAL.TTF");
     menu.setFont(font);
     menu.setString("Press 'P' to play or 'Q' to quit");
@@ -30,13 +32,16 @@ int main()
             {
                 window.close();
             }
-            if (event.type == sf::Event::KeyReleased(sf::Keyboard::P))
-                game_loop(sf::RenderWindow& window);
-            if (event.type == sf::Event::KeyReleased(sf::Keyboard::Q))
+            if (event.type == sf::Event::KeyReleased)
+            {  
+                if (event.key.code == sf::Keyboard::P)
+                    game_loop(window);
+                if (event.key.code == sf::Keyboard::Q)
                 {
                     window.clear();
                     window.close();
                 }
+            }
         }
 
         window.clear();
@@ -65,6 +70,7 @@ void game_loop(sf::RenderWindow& window)
     wizard_txt.loadFromFile("/textures/Wizard.png");
     archer_txt.loadFromFile("/textures/Archer.png");
 
+    window.clear();
     num = rand() % 100;
 
     if (num <= 33)
@@ -90,40 +96,43 @@ void game_loop(sf::RenderWindow& window)
     {
         for (auto event = sf::Event{}; window.pollEvent(event);)
         {
-            if (event.type == sf::Event::KeyReleased(sf::Keyboard::W))
+            if (event.type == sf::Event::KeyReleased)
             {
-                player_choice = 'w';
-                player_sprite.setTexture(wizard_txt);
-                player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
-                window.draw(cpu_sprite);
-                window.draw(player_sprite);
-                window.display();
-            }
-            else if (event.type == sf::Event::KeyReleased(sf::Keyboard::K))
-            {
-                player_choice = 'k';
-                player_sprite.setTexture(knight_txt);
-                player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
-                window.draw(cpu_sprite);
-                window.draw(player_sprite);
-                window.display();
-            }
-            else if (event.type == sf::Event::KeyReleased(sf::Keyboard::A))
-            {
-                player_choice = 'a';
-                player_sprite.setTexture(archer_txt);
-                player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
-                window.draw(cpu_sprite);
-                window.draw(player_sprite);
-                window.display();
-            }
-            if (event.type == sf::Event::KeyReleased(sf::Keyboard::Y))
-                game_loop(sf::RenderWindow &window);
-            else if (event.type == sf::Event::KeyReleased(sf::Keyboard::N))
+                if (event.key.code == sf::Keyboard::W)
+                {
+                    player_choice = 'w';
+                    player_sprite.setTexture(wizard_txt);
+                    player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
+                    window.draw(cpu_sprite);
+                    window.draw(player_sprite);
+                    window.display();
+                }
+                if (event.key.code == sf::Keyboard::K)
+                {
+                    player_choice = 'k';
+                    player_sprite.setTexture(knight_txt);
+                    player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
+                    window.draw(cpu_sprite);
+                    window.draw(player_sprite);
+                    window.display();
+                }
+                if (event.key.code == sf::Keyboard::A)
+                {
+                    player_choice = 'a';
+                    player_sprite.setTexture(archer_txt);
+                    player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
+                    window.draw(cpu_sprite);
+                    window.draw(player_sprite);
+                    window.display(); 
+                }
+                if (event.key.code == sf::Keyboard::Y)
+                    game_loop(window);
+                if (event.key.code == sf::Keyboard::N)
                 {
                     window.clear();
                     window.close();
                 }
+            }
         }
 
         text.setString("Make Your Choice! Press W for Wizard, K for Knight, or A for archer!");
