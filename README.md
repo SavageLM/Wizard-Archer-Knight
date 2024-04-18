@@ -12,7 +12,8 @@
 
 ### How to Run
 - Navigate to Executable, double left click, or Right click and select run
-- If you you want to compile it on your own, use the command cmake -S . -B build -DCMAKE_BUILD_TYPE=Release or cmake --build build
+- If you you want to compile it on your own, use the command cmake -S . -B build -DCMAKE_BUILD_TYPE=Release then cmake --build build
+- Then ./build/bin/WAK
 
 ### Repo Files
 | **File** | *__Description__* |
