@@ -6,22 +6,22 @@ void game_loop(sf::RenderWindow& window);
 
 int main()
 {
-    auto window = sf::RenderWindow{ { 900u, 900u }, "W.A.K" };
+    auto window = sf::RenderWindow{ { 1100u, 800u }, "W.A.K" };
     window.setFramerateLimit(144);
     sf::Texture title_txt;
     sf::Sprite title;
     sf::Font font;
     sf::Text menu;
 
-    title_txt.loadFromFile("/textures/Title.png");
+    title_txt.loadFromFile("/mnt/c/Users/nagol/lab-hacksprint_1/src/textures/Title.png");
     title.setTexture(title_txt);
-    title.setPosition(sf::Vector2f(0.f, 200.f));
-    font.loadFromFile("/Font/ARIAL.TTF");
+    title.setPosition(sf::Vector2f(200.f, 0.f));
+    font.loadFromFile("/mnt/c/Users/nagol/lab-hacksprint_1/src/Font/ARIAL.TTF");
     menu.setFont(font);
     menu.setString("Press 'P' to play or 'Q' to quit");
     menu.setCharacterSize(30);
     menu.setFillColor(sf::Color::White);
-    menu.setPosition(sf::Vector2(700.f, 50.f));
+    menu.setPosition(sf::Vector2(350.f, 700.f));
 
 
     while (window.isOpen())
@@ -59,37 +59,42 @@ void game_loop(sf::RenderWindow& window)
     sf::Texture knight_txt, wizard_txt, archer_txt;
     sf::Sprite player_sprite, cpu_sprite;
     sf::Font font;
-    sf::Text text;
+    sf::Text start, result;
 
-    font.loadFromFile("/Font/ARIAL.TTF");
-    text.setFont(font);
-    text.setCharacterSize(30);
-    text.setFillColor(sf::Color::White);
+    font.loadFromFile("/mnt/c/Users/nagol/lab-hacksprint_1/src/Font/ARIAL.TTF");
+    start.setFont(font);
+    start.setCharacterSize(30);
+    start.setFillColor(sf::Color::White);
 
-    knight_txt.loadFromFile("/textures/Knight.png");
-    wizard_txt.loadFromFile("/textures/Wizard.png");
-    archer_txt.loadFromFile("/textures/Archer.png");
+    result.setFont(font);
+    result.setCharacterSize(30);
+    result.setFillColor(sf::Color::White);
+
+    knight_txt.loadFromFile("/mnt/c/Users/nagol/lab-hacksprint_1/src/textures/Knight.png");
+    wizard_txt.loadFromFile("/mnt/c/Users/nagol/lab-hacksprint_1/src/textures/Wizard.png");
+    archer_txt.loadFromFile("/mnt/c/Users/nagol/lab-hacksprint_1/src/textures/Archer.png");
 
     window.clear();
+    srand((unsigned) time(NULL));
     num = rand() % 100;
 
     if (num <= 33)
     {
         cpu_choice = 'w';
         cpu_sprite.setTexture(wizard_txt);
-        cpu_sprite.setPosition(sf::Vector2f(500.f, 100.f));
+        cpu_sprite.setPosition(sf::Vector2f(600.f, 40.f));
     }
     else if (num >= 34 && num <= 66)
     {
         cpu_choice = 'k';
         cpu_sprite.setTexture(knight_txt);
-        cpu_sprite.setPosition(sf::Vector2f(500.f, 100.f));
+        cpu_sprite.setPosition(sf::Vector2f(600.f, 40.f));
     }
     else if (num >= 67 && num <= 99 )
     {
         cpu_choice = 'a';
         cpu_sprite.setTexture(archer_txt);
-        cpu_sprite.setPosition(sf::Vector2f(500.f, 100.f));
+        cpu_sprite.setPosition(sf::Vector2f(600.f, 40.f));
     }
 
     while (window.isOpen())
@@ -102,7 +107,7 @@ void game_loop(sf::RenderWindow& window)
                 {
                     player_choice = 'w';
                     player_sprite.setTexture(wizard_txt);
-                    player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
+                    player_sprite.setPosition(sf::Vector2f(50.f, 40.f));
                     window.draw(cpu_sprite);
                     window.draw(player_sprite);
                     window.display();
@@ -111,7 +116,7 @@ void game_loop(sf::RenderWindow& window)
                 {
                     player_choice = 'k';
                     player_sprite.setTexture(knight_txt);
-                    player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
+                    player_sprite.setPosition(sf::Vector2f(50.f, 40.f));
                     window.draw(cpu_sprite);
                     window.draw(player_sprite);
                     window.display();
@@ -120,7 +125,7 @@ void game_loop(sf::RenderWindow& window)
                 {
                     player_choice = 'a';
                     player_sprite.setTexture(archer_txt);
-                    player_sprite.setPosition(sf::Vector2f(100.f, 100.f));
+                    player_sprite.setPosition(sf::Vector2f(50.f, 40.f));
                     window.draw(cpu_sprite);
                     window.draw(player_sprite);
                     window.display(); 
@@ -135,8 +140,9 @@ void game_loop(sf::RenderWindow& window)
             }
         }
 
-        text.setString("Make Your Choice! Press W for Wizard, K for Knight, or A for archer!");
-        window.draw(text);
+        start.setString("Make Your Choice! Press W for Wizard, K for Knight, or A for archer!");
+        start.setPosition(sf::Vector2f(50.f, 0.f));
+        window.draw(start);
         window.display();
 
         if (player_choice)
@@ -145,23 +151,23 @@ void game_loop(sf::RenderWindow& window)
             {
                 if (player_choice == 'w')
                     {
-                        text.setString("Draw! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("Draw! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
                 else if (player_choice == 'k')
                    {
-                        text.setString("You Lose! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("You Lose! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
                 else if (player_choice =='a')
                     {
-                        text.setString("You Win! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("You Win! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
             }
@@ -169,23 +175,23 @@ void game_loop(sf::RenderWindow& window)
             {
                 if (player_choice == 'k')
                     {
-                        text.setString("Draw! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("Draw! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
                 else if (player_choice == 'a')
                     {
-                        text.setString("You Lose! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("You Lose! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
                 else if (player_choice =='w')
                     {
-                        text.setString("You Win! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("You Win! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
             }
@@ -193,23 +199,23 @@ void game_loop(sf::RenderWindow& window)
             {
                 if (player_choice == 'a')
                     {
-                        text.setString("Draw! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("Draw! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
                 else if (player_choice == 'w')
                     {
-                        text.setString("You Lose! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("You Lose! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
                 else if (player_choice =='k')
                     {
-                        text.setString("You Win! Play Again? (Y/N)");
-                        text.setPosition(sf::Vector2(0.f, 700.f));
-                        window.draw(text);
+                        result.setString("You Win! Play Again? (Y/N)");
+                        result.setPosition(sf::Vector2f(50.f, 700.f));
+                        window.draw(result);
                         window.display();
                     }
             }

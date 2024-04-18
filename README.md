@@ -19,6 +19,8 @@
 |----------|----------------:|
 |src/wak.cpp| main file for program|
 |CMakeLists.txt| script for building project
+|Textures| Folder for holding sprite textures|
+|Font| Folder for holding font files|
 
 #### Authors
 Logan Savage
