@@ -28,4 +28,4 @@
 |src/Font| Folder for holding font files|
 
 #### Authors
-Logan Savage
+Logan Savage | [LinkedIn](www.linkedin.com/in/logan-m-savage) | [Github](https://github.com/SavageLM)
