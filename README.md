@@ -15,18 +15,17 @@
 - Standard C++ Libraries
 - SFML LIbraries
 
-### How to Run
-- Navigate to Executable, double left click, or Right click and select run
+### How to Run on Linux systems
 - If you you want to compile it on your own, use the command cmake -S . -B build -DCMAKE_BUILD_TYPE=Release then cmake --build build
-- Then ./build/bin/WAK
+- Then type  ./build/bin/WAK in your terminal
 
 ### Repo Files
 | **File** | *__Description__* |
 |----------|----------------:|
 |src/wak.cpp| main file for program|
 |CMakeLists.txt| script for building project
-|Textures| Folder for holding sprite textures|
-|Font| Folder for holding font files|
+|src/Textures| Folder for holding sprite textures|
+|src/Font| Folder for holding font files|
 
 #### Authors
 Logan Savage
